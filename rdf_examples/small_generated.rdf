@@ -1,0 +1,54 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bl="https://benchling.com/sbol/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:s="http://sbols.org/v1#" xmlns:so="http://purl.obolibrary.org/obo/">
+    <s:DnaComponent rdf:about="https://example.com/sbol/s/small_generated">
+        <s:displayId>small_generated</s:displayId>
+        <s:name>small_generated</s:name>
+        <s:description />
+        <s:dnaSequence>
+            <s:DnaSequence rdf:about="https://example.com/sbol/s/small_generated/bases">
+                <s:nucleotides>gcgctgtgcctgacggtgatcccgcaacagggttctcgagtcaaaatctacgcccgattaggcttcctgcaccatccgaggt</s:nucleotides>
+            </s:DnaSequence>
+        </s:dnaSequence>
+        <s:annotation>
+            <s:SequenceAnnotation rdf:about="https://example.com/sbol/s/small_generated/a/0">
+                <s:bioStart>12</s:bioStart>
+                <s:bioEnd>53</s:bioEnd>
+                <s:strand>+</s:strand>
+                <s:subComponent>
+                    <s:DnaComponent rdf:about="https://example.com/sbol/s/small_generated/ac/0">
+                        <s:displayId>anno_0</s:displayId>
+                        <s:name>annotation_0</s:name>
+                        <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000110" />
+                    </s:DnaComponent>
+                </s:subComponent>
+            </s:SequenceAnnotation>
+        </s:annotation>
+        <s:annotation>
+            <s:SequenceAnnotation rdf:about="https://example.com/sbol/s/small_generated/a/1">
+                <s:bioStart>67</s:bioStart>
+                <s:bioEnd>85</s:bioEnd>
+                <s:strand>-</s:strand>
+                <s:subComponent>
+                    <s:DnaComponent rdf:about="https://example.com/sbol/s/small_generated/ac/1">
+                        <s:displayId>anno_1</s:displayId>
+                        <s:name>annotation_1</s:name>
+                        <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000110" />
+                    </s:DnaComponent>
+                </s:subComponent>
+            </s:SequenceAnnotation>
+        </s:annotation>
+        <s:annotation>
+            <s:SequenceAnnotation rdf:about="https://example.com/sbol/s/small_generated/a/2">
+                <s:bioStart>49</s:bioStart>
+                <s:bioEnd>89</s:bioEnd>
+                <s:strand>+</s:strand>
+                <s:subComponent>
+                    <s:DnaComponent rdf:about="https://example.com/sbol/s/small_generated/ac/2">
+                        <s:displayId>anno_2</s:displayId>
+                        <s:name>annotation_2</s:name>
+                        <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000110" />
+                    </s:DnaComponent>
+                </s:subComponent>
+            </s:SequenceAnnotation>
+        </s:annotation>
+    </s:DnaComponent>
+</rdf:RDF>

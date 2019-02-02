@@ -1,0 +1,28 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bl="https://benchling.com/sbol/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:s="http://sbols.org/v1#" xmlns:so="http://purl.obolibrary.org/obo/">
+    <s:DnaComponent rdf:about="https://example.com/sbol/s/{{name}}">
+        <s:displayId>{{name}}</s:displayId>
+        <s:name>{{name}}</s:name>
+        <s:description />
+        <s:dnaSequence>
+            <s:DnaSequence rdf:about="https://example.com/sbol/s/{{name}}/bases">
+                <s:nucleotides>{{#nucleotides}}{{.}}{{/nucleotides}}</s:nucleotides>
+            </s:DnaSequence>
+        </s:dnaSequence>
+        {{#annotations}}
+        <s:annotation>
+            <s:SequenceAnnotation rdf:about="https://example.com/sbol/s/{{name}}/a/{{number}}">
+                <s:bioStart>{{start}}</s:bioStart>
+                <s:bioEnd>{{end}}</s:bioEnd>
+                <s:strand>{{strand}}</s:strand>
+                <s:subComponent>
+                    <s:DnaComponent rdf:about="https://example.com/sbol/s/{{name}}/ac/{{number}}">
+                        <s:displayId>anno_{{number}}</s:displayId>
+                        <s:name>{{annotationName}}</s:name>
+                        <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000110" />
+                    </s:DnaComponent>
+                </s:subComponent>
+            </s:SequenceAnnotation>
+        </s:annotation>
+        {{/annotations}}
+    </s:DnaComponent>
+</rdf:RDF>
