@@ -9,8 +9,9 @@ const argv = minimist(process.argv.slice(2));
 const BASES = ['g', 'c', 'a', 't'];
 
 const name = argv['name'];
-const nucleotides = argv['nucleotides'];
-const annotations = argv['annotations'];
+const nucleotides = Number(argv['nucleotides']);
+const annotations = Number(argv['annotations']);
+console.log(nucleotides === 100);
 
 if (!name || !nucleotides || !annotations) {
   console.log(`Usage: node generate-data.js --name <NAME>
@@ -23,13 +24,13 @@ const renderer = resolver('template.xml', {
   name: name,
   nucleotides: function* () {
     for (i = 0; i < nucleotides; i++) {
-      yield BASES[_.random(0, 4)];
+      yield BASES[_.random(0, BASES.length - 1)];
     }
   },
   annotations: function* () {
     for(i = 0; i < annotations; i++) {
-      const start = _.random(0, nucleotides);
-      const end = _.random(0, nucleotides);
+      const start = _.random(0, nucleotides - 1);
+      const end = _.random(0, nucleotides - 1);
       yield {
         number: i,
         annotationName: `annotation_${i}`,
