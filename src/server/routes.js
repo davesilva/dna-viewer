@@ -9,7 +9,7 @@ module.exports = (router = new Router()) => {
 
   router.get('/sequence/:name', async (req, res) => {
     const name = req.params.name;
-    const filepath = path.join('..', '..', 'data', name);
+    const filepath = path.join(__dirname, '..', '..', 'data', name);
     try {
       const stats = await fs.stat(path.join(filepath, 'nucleotides'));
       const annotations = await fs.readFile(path.join(filepath, 'annotations.json'));
@@ -26,7 +26,7 @@ module.exports = (router = new Router()) => {
 
   router.get('/sequence/:name/nucleotides', async (req, res) => {
     const name = req.params.name;
-    const filepath = path.join('..', '..', 'data', name);
+    const filepath = path.join(__dirname, '..', '..', 'data', name);
     const start = Number(req.query.start || 0);
     const end = Number(req.query.end || 1000);
     const length = end - start;
