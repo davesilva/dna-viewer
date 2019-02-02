@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.4",
     "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -11,7 +12,8 @@
   "devDependencies": {
     "minimist": "^1.2.0",
     "mustachio": "^1.0.1",
-    "rdfxml-streaming-parser": "^1.2.0"
+    "rdfxml-streaming-parser": "^1.2.0",
+    "supertest": "^3.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
