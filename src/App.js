@@ -12,13 +12,16 @@ const mapStateToProps = (state, props) => ({
 });
 
 const actions = {
+  fetchSequenceList: sequenceActions.fetchSequenceList,
   fetchSequence: sequenceActions.fetchSequence,
   fetchNucleotides: sequenceActions.fetchNucleotides
 };
 
 class App extends Component {
   componentDidMount() {
-    if (!_.isEmpty(this.props.sequenceName)) {
+    if (_.isEmpty(this.props.sequenceName)) {
+      this.props.fetchSequenceList();
+    } else {
       this.props.fetchSequence(this.props.sequenceName);
     }
   }
