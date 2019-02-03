@@ -48,16 +48,16 @@ export default class DnaSequence extends Component {
     return (
       <svg ref={this.ref} style={{width: '100%', height: '100%'}}>
         <g transform='translate(0,50)'>
-        <Axis {...props} values={[...props.values, this.props.nucleotideCount]} />
+          <Axis {...props} values={[...props.values, this.props.nucleotideCount]} />
         </g>
         {
           _.map(this.props.annotations, annotation => (
-          <g key={annotation.name + annotation.start + annotation.end}>
-            <rect className='DnaSequence-annotation'
-                  x={scale(annotation.start)}
-                  y={100}
-                  width={scale(annotation.end) - scale(annotation.start)}
-                  height={20}/>
+            <g key={annotation.name + annotation.start + annotation.end}>
+              <rect className='DnaSequence-annotation'
+                    x={scale(annotation.start)}
+                    y={100}
+                    width={scale(annotation.end) - scale(annotation.start)}
+                    height={20}/>
               {
                 scale(annotation.end) - scale(annotation.start) > 100 && (
                   <text x={scale(annotation.start)}
