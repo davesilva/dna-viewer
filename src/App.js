@@ -1,28 +1,39 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import * as sequenceActions from './actions/sequenceActions';
 import './App.css';
+import DnaSequence from './components/DnaSequence';
+
+const mapStateToProps = (state, props) => ({
+  sequenceName: _.last(props.pathname.split('/')),
+  nucleotideCount: state.sequence.nucleotideCount,
+  annotations: state.sequence.annotations
+});
+
+const actions = {
+  fetchSequence: sequenceActions.fetchSequence,
+  fetchNucleotides: sequenceActions.fetchNucleotides
+};
 
 class App extends Component {
+  componentDidMount() {
+    if (!_.isEmpty(this.props.sequenceName)) {
+      this.props.fetchSequence(this.props.sequenceName);
+    }
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    if (_.isEmpty(this.props.sequenceName)) {
+      return (
+        <div className="App">
+          Sequences
+        </div>
+      );
+    } else {
+      return <DnaSequence {...this.props}/>;
+    }
   }
 }
 
-export default App;
+export default connect(mapStateToProps, actions)(App);
