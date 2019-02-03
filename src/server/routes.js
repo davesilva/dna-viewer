@@ -7,7 +7,17 @@ module.exports = (router = new Router()) => {
     res.send('Hello World');
   });
 
-  router.get('/sequence/:name', async (req, res) => {
+  router.get('/api/sequences', async (req, res) => {
+    const filepath = path.join(__dirname, '..', '..', 'data');
+    try {
+      const files = await fs.readdir(filepath);
+      res.status(200).json({ sequences: files });
+    } catch(e) {
+      res.status(200).json({ sequences: [] });
+    }
+  });
+
+  router.get('/api/sequences/:name', async (req, res) => {
     const name = req.params.name;
     const filepath = path.join(__dirname, '..', '..', 'data', name);
     try {
@@ -24,7 +34,7 @@ module.exports = (router = new Router()) => {
     }
   });
 
-  router.get('/sequence/:name/nucleotides', async (req, res) => {
+  router.get('/api/sequences/:name/nucleotides', async (req, res) => {
     const name = req.params.name;
     const filepath = path.join(__dirname, '..', '..', 'data', name);
     const start = Number(req.query.start || 0);

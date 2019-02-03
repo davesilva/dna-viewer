@@ -19,13 +19,43 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /sequence/:name', () => {
+describe('GET /api/sequences', () => {
+  it('returns an empty list if the data directory is not found', async () => {
+    fs.readdir.mockRejectedValue({});
+
+    const app = initServer();
+    const response = await request(app).get('/api/sequences');
+    expect(response.status).toBe(200);
+    expect(response.body.sequences.length).toBe(0);
+  });
+
+  it('returns an empty list if there are no files in the directory', async () => {
+    fs.readdir.mockResolvedValue([]);
+
+    const app = initServer();
+    const response = await request(app).get('/api/sequences');
+    expect(response.status).toBe(200);
+    expect(response.body.sequences.length).toBe(0);
+  });
+
+  it('returns a list of sequence names', async () => {
+    fs.readdir.mockResolvedValue(['test']);
+
+    const app = initServer();
+    const response = await request(app).get('/api/sequences');
+    expect(response.status).toBe(200);
+    expect(response.body.sequences.length).toBe(1);
+    expect(response.body.sequences[0]).toBe('test');
+  });
+});
+
+describe('GET /api/sequences/:name', () => {
   it('returns a 404 if the sequence is not found', async () => {
     fs.stat.mockRejectedValue({});
     fs.readFile.mockRejectedValue({});
 
     const app = initServer();
-    const response = await request(app).get('/sequence/non_existent');
+    const response = await request(app).get('/api/sequences/non_existent');
     expect(response.status).toBe(404);
     expect(response.body.error).toBe('Sequence non_existent not found');
   });
@@ -37,19 +67,19 @@ describe('GET /sequence/:name', () => {
     ]));
 
     const app = initServer();
-    const response = await request(app).get('/sequence/test');
+    const response = await request(app).get('/api/sequences/test');
     expect(response.status).toBe(200);
     expect(response.body.nucleotides).toBe(10);
     expect(response.body.annotations[0].start).toBe(0);
   });
 });
 
-describe('GET /sequence/:name/nucleotides', () => {
+describe('GET /api/sequences/:name/nucleotides', () => {
   it('returns a 404 if the sequence is not found', async () => {
     fs.readFile.mockRejectedValue({});
 
     const app = initServer();
-    const response = await request(app).get('/sequence/non_existent/nucleotides');
+    const response = await request(app).get('/api/sequences/non_existent/nucleotides');
     expect(response.status).toBe(404);
     expect(response.body.error).toBe('Sequence non_existent not found');
   });
@@ -62,7 +92,7 @@ describe('GET /sequence/:name/nucleotides', () => {
     });
 
     const app = initServer();
-    const response = await request(app).get('/sequence/test/nucleotides');
+    const response = await request(app).get('/api/sequences/test/nucleotides');
     expect(response.status).toBe(200);
     expect(fs.read).toHaveBeenCalledWith(1, expect.any(Buffer), 0, 1000, 0);
     expect(response.body.nucleotides).toBe('actggactgg');
@@ -78,7 +108,8 @@ describe('GET /sequence/:name/nucleotides', () => {
     });
 
     const app = initServer();
-    const response = await request(app).get('/sequence/test/nucleotides').query({ start: 10, end: 20 });
+    const response = await request(app).get('/api/sequences/test/nucleotides')
+                                       .query({ start: 10, end: 20 });
     expect(response.status).toBe(200);
     expect(fs.read).toHaveBeenCalledWith(1, expect.any(Buffer), 0, 10, 10);
     expect(response.body.nucleotides).toBe('actggactgg');
