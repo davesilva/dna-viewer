@@ -16,6 +16,7 @@
     "minimist": "^1.2.0",
     "mustachio": "^1.0.1",
     "rdfxml-streaming-parser": "^1.2.0",
+    "redux-mock-store": "^1.5.3",
     "supertest": "^3.4.2"
   },
   "scripts": {
@@ -35,5 +36,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "http://localhost:3001"
 }
