@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "import-data": "node scripts/import-data.js",
+    "import-data": "node --max-old-space-size=4096 scripts/import-data.js",
     "generate-data": "node scripts/generate-data.js",
     "start-api": "node src/server/index.js"
   },

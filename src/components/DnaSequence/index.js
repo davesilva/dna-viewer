@@ -33,19 +33,35 @@ export default class DnaSequence extends Component {
       .on('wheel', () => { d3.event.preventDefault(); });
   }
 
-  handleZoom() {
-    this.setState({
-      zoomTransform: d3.event.transform
-    });
-  }
-
-  render() {
+  getScale() {
     const scale = scaleLinear()
           .domain([0, this.props.nucleotideCount])
           .range([MARGIN, this.state.width - (MARGIN * 2)]);
     if (this.state.zoomTransform) {
       scale.domain(this.state.zoomTransform.rescaleX(scale).domain());
     }
+    return scale;
+  }
+
+  handleZoom() {
+    this.setState({
+      zoomTransform: d3.event.transform
+    });
+    const [scaleStart, scaleEnd] = this.getScale().domain();
+    if (scaleEnd - scaleStart < 1000) {
+      if (!this.props.getNucleotideAtIndex(scaleStart)) {
+        const start = Math.floor(scaleStart / 1000) * 1000;
+        this.props.fetchNucleotides(this.props.sequenceName, start, start + 1000);
+      }
+      if (!this.props.getNucleotideAtIndex(scaleEnd)) {
+        const start = Math.floor(scaleEnd / 1000) * 1000;
+        this.props.fetchNucleotides(this.props.sequenceName, start, start + 1000);
+      }
+    }
+  }
+
+  render() {
+    const scale = this.getScale();
 
     return (
       <svg ref={this.ref} style={{width: '100%', height: '100%'}}>

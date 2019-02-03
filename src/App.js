@@ -5,15 +5,16 @@ import * as sequenceActions from './actions/sequenceActions';
 import SequenceList from './components/SequenceList';
 import DnaSequence from './components/DnaSequence';
 
-const PAGE_SIZE = 5000;
-
 const mapStateToProps = (state, props) => ({
   sequenceName: _.last(props.pathname.split('/')),
   sequences: state.sequenceList,
   nucleotideCount: state.sequence.nucleotideCount,
   annotations: state.sequence.annotations,
   getNucleotideAtIndex: index => {
-    return state.sequence.nucleotides[0].slice(index, index + 1);
+    const chunkIndex = Math.floor(index / 1000) * 1000;
+    const chunks = state.sequence.nucleotides;
+    const chunk = chunks && chunks[chunkIndex];
+    return chunk && chunk.charAt(index - chunkIndex);
   }
 });
 
@@ -29,7 +30,6 @@ class App extends Component {
       this.props.fetchSequenceList();
     } else {
       this.props.fetchSequence(this.props.sequenceName);
-      this.props.fetchNucleotides(this.props.sequenceName, 0, PAGE_SIZE);
     }
   }
 

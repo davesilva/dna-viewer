@@ -11,7 +11,6 @@ const BASES = ['g', 'c', 'a', 't'];
 const name = argv['name'];
 const nucleotides = Number(argv['nucleotides']);
 const annotations = Number(argv['annotations']);
-console.log(nucleotides === 100);
 
 if (!name || !nucleotides || !annotations) {
   console.log(`Usage: node generate-data.js --name <NAME>
