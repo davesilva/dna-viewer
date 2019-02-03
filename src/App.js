@@ -2,11 +2,12 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sequenceActions from './actions/sequenceActions';
-import './App.css';
+import SequenceList from './components/SequenceList';
 import DnaSequence from './components/DnaSequence';
 
 const mapStateToProps = (state, props) => ({
   sequenceName: _.last(props.pathname.split('/')),
+  sequences: state.sequenceList,
   nucleotideCount: state.sequence.nucleotideCount,
   annotations: state.sequence.annotations
 });
@@ -28,11 +29,7 @@ class App extends Component {
 
   render() {
     if (_.isEmpty(this.props.sequenceName)) {
-      return (
-        <div className="App">
-          Sequences
-        </div>
-      );
+      return <SequenceList sequences={this.props.sequences}/>;
     } else {
       return <DnaSequence {...this.props}/>;
     }

@@ -17,6 +17,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
     "minimist": "^1.2.0",
     "mustachio": "^1.0.1",
     "rdfxml-streaming-parser": "^1.2.0",
