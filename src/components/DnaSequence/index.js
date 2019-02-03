@@ -6,6 +6,7 @@ import { zoom } from 'd3-zoom';
 import SvgContainer from '../SvgContainer';
 import Axis from '../Axis';
 import Annotation from '../Annotation';
+import Nucleotides from '../Nucleotides';
 import './styles.css';
 
 const MARGIN = 50;
@@ -48,6 +49,10 @@ export default class DnaSequence extends Component {
 
     return (
       <svg ref={this.ref} style={{width: '100%', height: '100%'}}>
+        <SvgContainer translateY={10}>
+          <Nucleotides scale={scale}
+                       getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
+        </SvgContainer>
         <SvgContainer translateY={50}>
           <Axis scale={scale} nucleotideCount={this.props.nucleotideCount} />
         </SvgContainer>

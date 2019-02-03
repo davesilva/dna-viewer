@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 export default function SvgContainer({
   translateX,
   translateY,
-  children
+  children,
+  className
 }) {
   return (
-    <g transform={`translate(${translateX || 0},${translateY || 0})`}>
+    <g className={className}
+       transform={`translate(${translateX || 0},${translateY || 0})`}>
       {children}
     </g>
   );
