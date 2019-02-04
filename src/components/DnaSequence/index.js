@@ -64,7 +64,7 @@ export default class DnaSequence extends Component {
     const scale = this.getScale();
 
     return (
-      <svg ref={this.ref} style={{width: '100%', height: '100%'}}>
+      <svg ref={this.ref} style={{ width: '100%', height: '100vh' }}>
         <SvgContainer translateY={10}>
           <Nucleotides scale={scale}
                        getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
@@ -74,10 +74,16 @@ export default class DnaSequence extends Component {
         </SvgContainer>
         <SvgContainer translateY={100}>
           {
-            _.map(this.props.annotations, annotation => (
-              <Annotation key={annotation.name + annotation.start + annotation.end}
-                          scale={scale}
-                          annotation={annotation}/>
+            _.map(this.props.annotations, (row, index) => (
+              <SvgContainer key={index} translateY={25 * index}>
+                {
+                  _.map(row, (annotation, index) => (
+                    <Annotation key={index}
+                                scale={scale}
+                                annotation={annotation}/>
+                  ))
+                }
+              </SvgContainer>
             ))
           }
         </SvgContainer>

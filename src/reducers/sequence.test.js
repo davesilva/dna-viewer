@@ -18,6 +18,42 @@ describe('FETCH_SEQUENCE', () => {
       annotations: []
     });
   });
+
+  it('sorts annotations from largest to smallest', () => {
+    const action = {
+      type: 'FETCH_SEQUENCE',
+      data: {
+        nucleotides: 1234,
+        annotations: [
+          { start: 10, end: 20 },
+          { start: 30, end: 60 }
+        ]
+      }
+    };
+    const next = sequence(defaultState, action);
+    expect(next).toEqual({
+      nucleotideCount: 1234,
+      annotations: [[{ start: 30, end: 60 }, {start: 10, end: 20}]]
+    });
+  });
+
+  it('separates overlapping annotations into different rows', () => {
+    const action = {
+      type: 'FETCH_SEQUENCE',
+      data: {
+        nucleotides: 1234,
+        annotations: [
+          { start: 10, end: 20 },
+          { start: 15, end: 25 }
+        ]
+      }
+    };
+    const next = sequence(defaultState, action);
+    expect(next).toEqual({
+      nucleotideCount: 1234,
+      annotations: [[{ start: 10, end: 20 }], [{ start: 15, end: 25 }]]
+    });
+  });
 });
 
 describe('FETCH_NUCLEOTIDES', () => {
