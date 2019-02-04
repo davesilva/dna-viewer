@@ -7,6 +7,7 @@ import SvgContainer from '../SvgContainer';
 import Axis from '../Axis';
 import Annotation from '../Annotation';
 import Nucleotides from '../Nucleotides';
+import Margins from '../Margins';
 import './styles.css';
 
 const MARGIN = 50;
@@ -36,7 +37,7 @@ export default class DnaSequence extends Component {
   getScale() {
     const scale = scaleLinear()
           .domain([0, this.props.nucleotideCount])
-          .range([MARGIN, this.state.width - (MARGIN * 2)]);
+          .range([MARGIN, this.state.width - MARGIN]);
     if (this.state.zoomTransform) {
       scale.domain(this.state.zoomTransform.rescaleX(scale).domain());
     }
@@ -64,7 +65,7 @@ export default class DnaSequence extends Component {
     const scale = this.getScale();
 
     return (
-      <svg ref={this.ref} style={{ width: '100%', height: '100vh' }}>
+      <svg ref={this.ref} className='DnaSequence'>
         <SvgContainer translateY={10}>
           <Nucleotides scale={scale}
                        getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
@@ -87,6 +88,7 @@ export default class DnaSequence extends Component {
             ))
           }
         </SvgContainer>
+        <Margins width={MARGIN}/>
       </svg>
     );
   }

@@ -1,3 +1,10 @@
-.DnaSequence-annotation {
-  fill: red;
+.DnaSequence {
+  width: 100%;
+  min-height: 100vh;
+  background: #eee;
+}
+
+.DnaSequence-left-margin,
+.DnaSequence-right-margin {
+  fill: #eee;
 }
