@@ -12,9 +12,13 @@ const mapStateToProps = (state, props) => ({
   annotations: state.sequence.annotations,
   getNucleotideAtIndex: index => {
     const chunkIndex = Math.floor(index / 1000) * 1000;
-    const chunks = state.sequence.nucleotides;
-    const chunk = chunks && chunks[chunkIndex];
-    return chunk && chunk.charAt(index - chunkIndex);
+    if (chunkIndex >= 0) {
+      const chunks = state.sequence.nucleotides;
+      const chunk = chunks && chunks[chunkIndex];
+      return chunk && chunk.charAt(index - chunkIndex);
+    } else {
+      return null;
+    }
   }
 });
 
