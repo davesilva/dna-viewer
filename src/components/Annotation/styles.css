@@ -1,3 +1,23 @@
 .Annotation {
-  fill: red;
+  stroke-width: 2px;
+}
+
+.Annotation-1 {
+  fill: #a7383d;
+  stroke: #540004;
+}
+
+.Annotation-2 {
+  fill: #aa6a39;
+  stroke: #552500;
+}
+
+.Annotation-3 {
+  fill: #236863;
+  stroke: #003430;
+}
+
+.Annotation-4 {
+  fill: #378b2e;
+  stroke: #074600;
 }

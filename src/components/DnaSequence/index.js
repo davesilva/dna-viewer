@@ -80,6 +80,7 @@ export default class DnaSequence extends Component {
                 {
                   _.map(row, (annotation, index) => (
                     <Annotation key={index}
+                                color={index % 4 + 1}
                                 scale={scale}
                                 annotation={annotation}/>
                   ))

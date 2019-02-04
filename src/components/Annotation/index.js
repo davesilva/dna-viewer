@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SvgContainer from '../SvgContainer';
 import './styles.css';
 
-export default function Annotation({ scale, annotation }) {
+export default function Annotation({ scale, annotation, color }) {
   const screenStart = scale.range()[0] - 50;
   const screenEnd = scale.range()[1] + 50;
   const screenWidth = screenEnd - screenStart;
@@ -14,7 +14,7 @@ export default function Annotation({ scale, annotation }) {
   if (scale(annotation.start) < screenEnd && scale(annotation.end) > screenStart) {
     return (
       <SvgContainer width={width} height={20}>
-        <rect className='Annotation'
+        <rect className={`Annotation Annotation-${color}`}
               x={x}
               y={0}
               width={width}
@@ -40,5 +40,6 @@ Annotation.propTypes = {
     start: PropTypes.number.isRequired,
     end: PropTypes.number.isRequired,
     strand: PropTypes.oneOf(['+', '-']).isRequired
-  }).isRequired
+  }).isRequired,
+  color: PropTypes.oneOf([1,2,3,4])
 };
