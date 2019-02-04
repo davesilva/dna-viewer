@@ -12,18 +12,26 @@ export default function Annotation({ scale, annotation, color }) {
   const shouldShowName = width >= 100;
 
   if (scale(annotation.start) < screenEnd && scale(annotation.end) > screenStart) {
+    let points;
+    if (annotation.strand === '+' && width > 20) {
+      points =
+        `${x} 0, ${x + width - 20} 0, ${x + width} 10, ${x + width - 20} 20, ${x} 20`;
+    } else if (annotation.strand === '-' && width > 20) {
+      points = `${x + 20} 0, ${x + width} 0, ${x + width} 20, ${x + 20} 20, ${x} 10`;
+    } else {
+      points = `${x} 0, ${x + width} 0, ${x + width} 20, ${x} 20`;
+    }
     return (
       <SvgContainer width={width} height={20}>
-        <rect className={`Annotation Annotation-${color}`}
-              x={x}
-              y={0}
-              width={width}
-              height={20}/>
+        <polygon className={`Annotation Annotation-${color}`}
+                 points={points}/>
         {
           shouldShowName && (
-            <text style={{ textAnchor: 'middle' }} x={x + width / 2} y={15}>
-              {annotation.name}
-            </text>
+            <svg x={Math.max(x + 20, 60)} y={0} width={width - 40} height={20}>
+              <text x={0} y={15}>
+                {annotation.name}
+              </text>
+            </svg>
           )
         }
       </SvgContainer>
