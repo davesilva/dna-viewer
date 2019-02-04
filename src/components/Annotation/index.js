@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 import SvgContainer from '../SvgContainer';
 import './styles.css';
 
@@ -21,19 +22,33 @@ export default function Annotation({ scale, annotation, color }) {
     } else {
       points = `${x} 0, ${x + width} 0, ${x + width} 20, ${x} 20`;
     }
+    const tooltip = `
+      ${annotation.name}<br/>
+      start: ${annotation.start}<br/>
+      end: ${annotation.end}<br/>
+      strand: ${annotation.strand}<br/>
+    `;
     return (
       <SvgContainer width={width} height={20}>
         <polygon className={`Annotation Annotation-${color}`}
-                 points={points}/>
+                 points={points}
+                 data-tip={tooltip}/>
         {
           shouldShowName && (
-            <svg x={Math.max(x + 20, 60)} y={0} width={width - 40} height={20}>
+            <svg x={Math.max(x + 20, 60)}
+                 y={0}
+                 width={width - 40}
+                 height={20}
+                 data-tip={tooltip}>
               <text x={0} y={15}>
                 {annotation.name}
               </text>
             </svg>
           )
         }
+        <foreignObject>
+          <ReactTooltip place='bottom' className='Annotation-tooltip' multiline/>
+        </foreignObject>
       </SvgContainer>
     );
   } else {

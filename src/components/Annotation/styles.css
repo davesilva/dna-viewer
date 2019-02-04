@@ -2,6 +2,10 @@
   stroke-width: 2px;
 }
 
+.Annotation-tooltip {
+  width: 200px;
+}
+
 .Annotation-1 {
   fill: #a7383d;
   stroke: #540004;
