@@ -24,7 +24,7 @@ describe('Annotation', () => {
     const result = shallow(<Annotation scale={scale} annotation={annotation}/>);
     const text = result.find('text');
     expect(text.text()).toContain('test');
-    expect(text.prop('x')).toBe(510);
+    expect(text.prop('x')).toBe(625);
     expect(text.prop('y')).toBe(15);
   });
 

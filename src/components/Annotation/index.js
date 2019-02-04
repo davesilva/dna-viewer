@@ -4,24 +4,33 @@ import SvgContainer from '../SvgContainer';
 import './styles.css';
 
 export default function Annotation({ scale, annotation }) {
-  const width = scale(annotation.end) - scale(annotation.start);
+  const screenStart = scale.range()[0] - 50;
+  const screenEnd = scale.range()[1] + 50;
+  const screenWidth = screenEnd - screenStart;
+  const x = Math.max(screenStart, scale(annotation.start));
+  const width = Math.min(screenWidth, scale(annotation.end) - x);
   const shouldShowName = width >= 100;
-  return (
-    <SvgContainer width={width} height={20}>
-      <rect className='Annotation'
-            x={scale(annotation.start)}
-            y={0}
-            width={width}
-            height={20}/>
-      {
-        shouldShowName && (
-          <text x={scale(annotation.start) + 10} y={15}>
-            {annotation.name}
-          </text>
-        )
-      }
-    </SvgContainer>
-  );
+
+  if (scale(annotation.start) < screenEnd && scale(annotation.end) > screenStart) {
+    return (
+      <SvgContainer width={width} height={20}>
+        <rect className='Annotation'
+              x={x}
+              y={0}
+              width={width}
+              height={20}/>
+        {
+          shouldShowName && (
+            <text style={{ textAnchor: 'middle' }} x={x + width / 2} y={15}>
+              {annotation.name}
+            </text>
+          )
+        }
+      </SvgContainer>
+    );
+  } else {
+    return null;
+  }
 }
 
 Annotation.propTypes = {
