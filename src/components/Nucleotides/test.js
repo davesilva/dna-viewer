@@ -21,7 +21,7 @@ describe('Nucleotides', () => {
       <Nucleotides getNucleotideAtIndex={() => 'a'}
                    scale={scale}/>
     );
-    expect(result.find('text').length).toBe(2);
+    expect(result.find('text').length).toBe(3);
     expect(result.find('text').first().prop('style')).toEqual({ fontSize: 16 });
   });
 
@@ -31,7 +31,7 @@ describe('Nucleotides', () => {
       <Nucleotides getNucleotideAtIndex={() => 'a'}
         scale={scale}/>
     );
-    expect(result.find('text').length).toBe(2);
+    expect(result.find('text').length).toBe(3);
     expect(result.find('text').first().prop('style')).toEqual({ fontSize: 8 });
   });
 });

@@ -8,7 +8,7 @@ export default function Nucleotides({ scale, getNucleotideAtIndex }) {
   const [containerX, containerWidth] = scale.range();
   const width = scale(1) - scale(0);
   const startIndex = Math.ceil(scale.invert(containerX));
-  const endIndex = Math.ceil(scale.invert(containerWidth));
+  const endIndex = Math.ceil(scale.invert(containerWidth + 1));
   if (width > 5) {
     const textSize = Math.min(10, (width - 5)) / 10;
     return (
