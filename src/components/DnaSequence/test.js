@@ -17,6 +17,7 @@ describe('DnaSequence', () => {
   };
   const defaultProps = {
     getNucleotideAtIndex,
+    sequenceName: 'test',
     annotations: [[annotation]]
   };
 
