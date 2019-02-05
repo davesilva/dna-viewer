@@ -1,0 +1,9 @@
+version: '3.6'
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - "./data:/usr/app/data"
+    ports:
+      - "3001:3001"

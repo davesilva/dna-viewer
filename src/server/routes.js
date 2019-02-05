@@ -3,10 +3,6 @@ const fs = require('fs-extra');
 const path = require('path');
 
 module.exports = (router = new Router()) => {
-  router.get('/', (req, res) => {
-    res.send('Hello World');
-  });
-
   router.get('/api/sequences', async (req, res) => {
     const filepath = path.join(__dirname, '..', '..', 'data');
     try {

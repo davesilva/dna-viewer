@@ -11,14 +11,6 @@ const initServer = () => {
   return app;
 };
 
-describe('GET /', () => {
-  it('returns the static homepage', async () => {
-    const app = initServer();
-    const response = await request(app).get('/');
-    expect(response.status).toBe(200);
-  });
-});
-
 describe('GET /api/sequences', () => {
   it('returns an empty list if the data directory is not found', async () => {
     fs.readdir.mockRejectedValue({});
