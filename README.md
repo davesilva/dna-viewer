@@ -6,24 +6,29 @@ A webpage for viewing annotated DNA.
 
 I included a Dockerfile to make it easy to get running. Just run
 `docker-compose build` to build the image, followed by `docker-compose up`
-to start. Then open your browser to `localhost:3000`.
+to start. Then open your browser to `localhost:3001`.
 
 ### Importing new data
 
 I included some preprocessed test data, but if you want to import new
-sequences, use the import data script like this:
+sequences, copy the rdf file to the `import` directory and then, use 
+the import data script like this:
 
-    docker-compose run app run import-data YOUR_FILE.rdf
-    
+    docker-compose run app import-data import/YOUR_FILE.rdf
+
 ### Generating test data
 
 I also included a script for generating random test data. To generate
 an RDF file for testing, run:
 
-    docker-compose run app run generate-data -- \
+    docker-compose run app generate-data -- \
       --nucleotides NUMBER_OF_NUCLEOTIDES \
       --annotations NUMBER_OF_ANNOTATIONS \
       --name NAME_OF_THE_SEQUENCE
+ 
+### Running tests
+
+    docker-compose run app test
 
 ## Features
 

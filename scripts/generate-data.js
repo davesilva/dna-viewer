@@ -41,5 +41,9 @@ const renderer = resolver('template.xml', {
   }
 });
 
-const stream = fs.createWriteStream(`${name}.rdf`);
+if (!fs.existsSync('import')) {
+  fs.mkdirSync('import');
+}
+
+const stream = fs.createWriteStream(`import/${name}.rdf`);
 renderer.stream().pipe(stream);

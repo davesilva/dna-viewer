@@ -9,6 +9,7 @@
 # production
 /build
 /data
+/import
 
 # misc
 .DS_Store

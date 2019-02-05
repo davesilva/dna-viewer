@@ -12,4 +12,5 @@ COPY . /usr/app
 
 RUN npm run build
 
-ENTRYPOINT ["npm", "run", "start-api"]
+ENTRYPOINT ["npm", "run"]
+CMD ["start-api"]

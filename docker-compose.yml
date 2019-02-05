@@ -5,5 +5,6 @@ services:
       context: .
     volumes:
       - "./data:/usr/app/data"
+      - "./import:/usr/app/import"
     ports:
       - "3001:3001"
