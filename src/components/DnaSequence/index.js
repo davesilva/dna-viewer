@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import { zoom } from 'd3-zoom';
@@ -70,9 +71,13 @@ export default class DnaSequence extends Component {
           <Nucleotides scale={scale}
                        getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
         </SvgContainer>
-        <SvgContainer translateY={50}>
-          <Axis scale={scale} nucleotideCount={this.props.nucleotideCount} />
-        </SvgContainer>
+        {
+          this.props.nucleotideCount && (
+            <SvgContainer translateY={50}>
+              <Axis scale={scale} nucleotideCount={this.props.nucleotideCount} />
+            </SvgContainer>
+          )
+        }
         <SvgContainer translateY={100}>
           {
             _.map(this.props.annotations, (row, index) => (
@@ -94,3 +99,14 @@ export default class DnaSequence extends Component {
     );
   }
 }
+
+DnaSequence.propTypes = {
+  getNucleotideAtIndex: PropTypes.func.isRequired,
+  nucleotideCount: PropTypes.number,
+  annotations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+    start: PropTypes.number.isRequired,
+    end: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    strand: PropTypes.oneOf(['+', '-'])
+  })))
+};
