@@ -72,12 +72,12 @@ an RDF file for testing, run:
   a little more sophisticated than `_.debounce`.
 
 * Usability: There are a number of usability issues with the default
-  behavior of the d3 scroll library. You can't select text because clicking
+  behavior of the d3 zoom library. You can't select text because clicking
   and dragging pans the view. Pinch zooming works but it's weirdly slow
   compared to scrolling. Horizontal scrolling with the trackpad should
   pan the view but instead it does nothing. You can also pan past the ends
   of the sequence when you zoom in. It's probably possible to override
-  this behavior and continue using d3 scroll, but I didn't spend enough
+  this behavior and continue using d3 zoom, but I didn't spend enough
   time investigating to figure out how to do it.
 
 * Visual bugs: There are some minor visual glitches. The text clipping
