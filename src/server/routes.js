@@ -51,5 +51,9 @@ module.exports = (router = new Router()) => {
     }
   });
 
+  router.get('/*', async (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
+  });
+
   return router;
 };
