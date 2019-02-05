@@ -1,0 +1,15 @@
+.SequenceList {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffcfaa;
+}
+
+.SequenceList-title {
+  margin: 0;
+  padding: 10px 50px;
+}
+
+.SequenceList-list {
+  list-style-type: none;
+  padding: 0px 70px;
+}

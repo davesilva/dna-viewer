@@ -71,41 +71,49 @@ export default class DnaSequence extends Component {
     const scale = this.getScale();
 
     return (
-      <svg ref={this.ref} className='DnaSequence'>
-        <SvgContainer translateY={10}>
-          <Nucleotides scale={scale}
-                       getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
-        </SvgContainer>
-        {
-          this.props.nucleotideCount && (
-            <SvgContainer translateY={50}>
-              <Axis scale={scale} nucleotideCount={this.props.nucleotideCount} />
-            </SvgContainer>
-          )
-        }
-        <SvgContainer translateY={100}>
+      <div className='DnaSequence'>
+        <h1 className='DnaSequence-title'>{this.props.sequenceName}</h1>
+        <div className='DnaSequence-instructions'>
+          Scroll to zoom<br/>
+          Click and drag to pan
+        </div>
+        <svg ref={this.ref} className='DnaSequence-svg'>
+          <SvgContainer translateY={10}>
+            <Nucleotides scale={scale}
+                         getNucleotideAtIndex={this.props.getNucleotideAtIndex}/>
+          </SvgContainer>
           {
-            _.map(this.props.annotations, (row, index) => (
-              <SvgContainer key={index} translateY={25 * index}>
-                {
-                  _.map(row, (annotation, index) => (
-                    <Annotation key={index}
-                                color={index % 4 + 1}
-                                scale={scale}
-                                annotation={annotation}/>
-                  ))
-                }
+            this.props.nucleotideCount && (
+              <SvgContainer translateY={50}>
+                <Axis scale={scale} nucleotideCount={this.props.nucleotideCount} />
               </SvgContainer>
-            ))
+            )
           }
-        </SvgContainer>
-        <Margins width={MARGIN}/>
-      </svg>
+          <SvgContainer translateY={100}>
+            {
+              _.map(this.props.annotations, (row, index) => (
+                <SvgContainer key={index} translateY={25 * index}>
+                  {
+                    _.map(row, (annotation, index) => (
+                      <Annotation key={index}
+                                  color={index % 4 + 1}
+                                  scale={scale}
+                                  annotation={annotation}/>
+                    ))
+                  }
+                </SvgContainer>
+              ))
+            }
+          </SvgContainer>
+          <Margins width={MARGIN}/>
+        </svg>
+      </div>
     );
   }
 }
 
 DnaSequence.propTypes = {
+  sequenceName: PropTypes.string.isRequired,
   getNucleotideAtIndex: PropTypes.func.isRequired,
   nucleotideCount: PropTypes.number,
   annotations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({

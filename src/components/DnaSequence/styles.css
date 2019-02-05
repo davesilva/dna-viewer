@@ -3,3 +3,19 @@
   min-height: 100vh;
   background: #ffcfaa;
 }
+
+.DnaSequence-title {
+  display: inline-block;
+  margin: 0;
+  padding: 10px 50px;
+}
+
+.DnaSequence-svg {
+  width: 100%;
+  height: 100vh;
+  cursor: grab;
+}
+
+.DnaSequence-instructions {
+  display: inline-block;
+}
