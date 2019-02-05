@@ -11,7 +11,7 @@ to start. Then open your browser to `localhost:3001`.
 ### Importing new data
 
 I included some preprocessed test data, but if you want to import new
-sequences, copy the rdf file to the `import` directory and then, use 
+sequences, copy the rdf file to the `import` directory and then use 
 the import data script like this:
 
     docker-compose run app import-data import/YOUR_FILE.rdf
