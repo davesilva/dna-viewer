@@ -33,6 +33,7 @@ export default class DnaSequence extends Component {
     d3.select(this.ref.current)
       .call(this.zoom)
       .on('wheel', () => { d3.event.preventDefault(); });
+    _.delay(this.fetchNucleotides.bind(this), 50);
   }
 
   getScale() {
@@ -49,6 +50,10 @@ export default class DnaSequence extends Component {
     this.setState({
       zoomTransform: d3.event.transform
     });
+    this.fetchNucleotides();
+  }
+
+  fetchNucleotides() {
     const [scaleStart, scaleEnd] = this.getScale().domain();
     if (scaleEnd - scaleStart < 1000) {
       if (!this.props.getNucleotideAtIndex(scaleStart)) {
